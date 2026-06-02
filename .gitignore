@@ -1,0 +1,15 @@
+venv/
+venv312/
+voice_env/
+tts_env/
+clean_tts/
+OpenVoice/
+.venv/
+
+xtts_model/
+
+__pycache__/
+*.pyc
+
+output.wav
+.cache/
