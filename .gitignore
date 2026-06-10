@@ -5,11 +5,25 @@ tts_env/
 clean_tts/
 OpenVoice/
 .venv/
+xtts_env/
 
 xtts_model/
 
 __pycache__/
 *.pyc
 
+.gradio/
+
+*.wav
+*.mp4
+*.m4a
+
+samples/outputs/
+
+*.pth
+*.safetensors
+
 output.wav
-.cache/
+myvoice.wav
+cloned_output.wav
+output_video.mp4

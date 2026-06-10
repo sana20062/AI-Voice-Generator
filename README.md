@@ -1,8 +1,31 @@
+---
+title: AI Voice Generator
+emoji: 🎤
+colorFrom: blue
+colorTo: purple
+sdk: gradio
+app_file: app.py
+pinned: false
+---
+
 # AI Voice Generator
 
-AI-powered text-to-speech application built using Python, Gradio, PyTorch and HuggingFace Transformers.
+An AI-powered text-to-speech application built with Python and Gradio.
 
 ## Features
-- Text to Speech
-- Gradio Web Interface
-- WAV Audio Output
+
+* Convert text to speech
+* Simple web interface
+* Audio output in WAV format
+
+## Technologies Used
+
+* Python
+* Gradio
+* PyTorch
+* Transformers
+* SoundFile
+
+## Author
+
+Pratistha

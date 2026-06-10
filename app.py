@@ -1,34 +1,37 @@
-import torch
-import soundfile as sf
+from TTS.api import TTS
 import gradio as gr
-from transformers import AutoProcessor, SpeechT5ForTextToSpeech, SpeechT5HifiGan
 
-processor = AutoProcessor.from_pretrained("microsoft/speecht5_tts")
-model = SpeechT5ForTextToSpeech.from_pretrained("microsoft/speecht5_tts")
-vocoder = SpeechT5HifiGan.from_pretrained("microsoft/speecht5_hifigan")
+print("Loading XTTS model...")
+tts = TTS("tts_models/multilingual/multi-dataset/xtts_v2")
 
-def clone_voice(text, audio_path):
-    inputs = processor(text=text, return_tensors="pt")
+def clone_voice(text, audio_file):
+    output_file = "myvoice.wav"
 
-    speaker_embeddings = torch.randn(1, 512)
-
-    speech = model.generate_speech(
-        inputs["input_ids"],
-        speaker_embeddings,
-        vocoder=vocoder
+    tts.tts_to_file(
+        text=text,
+        speaker_wav=audio_file,
+        language="en",
+        file_path=output_file
     )
 
-    sf.write("output.wav", speech.numpy(), 16000)
-
-    return "output.wav"
+    return output_file
 
 demo = gr.Interface(
     fn=clone_voice,
     inputs=[
-        gr.Textbox(label="Text"),
-        gr.Audio(type="filepath", label="Upload Voice Sample")
+        gr.Textbox(
+            label="Enter Text"
+        ),
+        gr.Audio(
+            type="filepath",
+            label="Upload Voice Sample"
+        )
     ],
-    outputs="audio"
+    outputs=gr.Audio(
+        label="Generated Voice"
+    ),
+    title="AI Voice Cloning (XTTS)",
+    description="Enter text and upload a voice sample."
 )
 
 demo.launch()
